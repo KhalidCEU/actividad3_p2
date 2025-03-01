@@ -2,6 +2,7 @@ package dominio;
 
 import java.util.function.Function;
 import java.util.stream.IntStream;
+import java.util.stream.DoubleStream;
 import java.util.List;
 
 public class Lambda {
@@ -14,6 +15,8 @@ public class Lambda {
         }
         return suma;
     }
+
+    // Ejercicio 13
 
     /**
      * Calcula una aproximación de la integral de una función lambda
@@ -123,5 +126,53 @@ public class Lambda {
         return lista;
     }
 
+    public static int productoEscalar(List<Integer> lista1, List<Integer> lista2) {
+        if (lista1.isEmpty() || lista2.isEmpty()) {
+            System.out.println("Ninguna de las listas debe estar vacía.");
+            return 1;
+        }
+
+        if (lista1.size() != lista2.size()) {
+            System.out.println("Las listas deben tener el mismo tamaño.");
+            return 1;
+        }
+
+        int productoEscalar = IntStream.range(0, lista1.size())
+            .map(i -> lista1.get(i) * lista2.get(i))
+            .sum();
+
+        return productoEscalar;
+    }
+
+    public static int fibonacci(int nb) {
+        if (nb <= 1)
+            return nb;
+
+        int fibonacci = IntStream.range(2, nb + 1)
+            .collect(() -> new int[]{0, 1}, // primeross valores de la lista
+                    (acc, i) -> {
+                        int next = acc[0] + acc[1];
+                        acc[0] = acc[1];
+                        acc[1] = next;
+                    },
+                    (acc1, acc2) -> {} // combiner del collect, no lo usamos
+            )[1]; // cogemos el ultimo elemento de los 2
+
+        return fibonacci;
+    }
+
+    // Ejercicio 16
+
+    public static double integralConStream(double a, double b, double h,
+    Function<Double, Double> funcion) {
+
+        double integralConSteam = DoubleStream
+            .iterate(a, x -> x + h)
+            .takeWhile(x -> x <= b)
+            .map(x -> funcion.apply(x) * h)
+            .sum();
+
+        return integralConSteam;
+    }
 }
 
