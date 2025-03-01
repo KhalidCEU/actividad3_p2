@@ -1,51 +1,33 @@
 package aplicacion;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import dominio.Mates;
+import dominio.*;
 
 public class Principal {
 
     public static void main(String[] args) {
-        // Suma hasta n
-        System.out.println("Suma hasta n: " + Mates.sumaHastaN(10));
+        System.out.println("\n -- Lambdas --");
 
-        // Factorial
-        System.out.println("Factorial: " + Mates.factorial(5));
+        System.out.println("Integral e^(x^2): " + Lambda.integralEXCuadrado(0, 1, 0.1));
+        System.out.println("Integral: " + Lambda.integral(0, 1, 0.1, x -> Math.exp(x*x)));
+        System.out.println("Suma hasta n: " + Lambda.sumaHastaN(10, x -> x + 1));
+        System.out.println("Factorial de n: " + Lambda.factorial(5));
+        System.out.println("Potencia Nesima de n: " + Lambda.potenciaN(2, 3));
+        System.out.println("Suma elementos lista: " + Lambda.sumaElementosLista(10));
+        System.out.println("Media elementos lista: " + Lambda.mediaElementosLista(10));
+        System.out.println("Desviacion tipica: " + Lambda.desviacionTipica(10));
+        System.out.println("Suma pares hasta n: " + Lambda.sumaParesHastaN(10));
+        List<Integer> listaNumeros = List.of(1, 2, 3, 4, 9, 10);
+        System.out.println("Suma pares lista: " + Lambda.sumaParesLista(listaNumeros));
+        System.out.println("Obtener lista par: " + Lambda.obtenerListaPar(listaNumeros));
+        System.out.println("Obtener pares hasta n: " + Lambda.obtenerParesHastaN(10));
 
-        // Potencia N-ésima
-        System.out.println("Potencia: " + Mates.potencia(2, 4));
-
-        // Suma elementos
-        int[] listaNumeros = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        System.out.println("Suma elementos lista: " + Mates.sumaElementosLista(listaNumeros, 0));
-
-        // Media elementos
-        System.out.println("Media elementos lista: " + Mates.mediaElementosLista(listaNumeros, 0, listaNumeros.length));
-
-        // Desviacion tipica
-        int[] listaNumeros2 = {9, 3, 8, 8, 9, 8, 9, 18};
-        double media = Mates.mediaElementosLista(listaNumeros2, 0, listaNumeros2.length);
-        System.out.println("Desviación elementos lista: " + Mates.desviacionElementosLista(listaNumeros2, media, listaNumeros2.length, 0, 0));
-
-        // Suma pares en n numeros
-        System.out.println("Suma pares: " + Mates.sumaParesHastaN(9));
-
-        // Suma pares de una lista
-        System.out.println("Suma pares (lista): " + Mates.sumaParesElementosLista(listaNumeros, listaNumeros.length, 0));
-
-        // Obtener pares de una lista
-        ArrayList<Integer> listaVacia = new ArrayList<Integer>();
-        System.out.println("Lista pares: " + Mates.obtenerListaPar(listaNumeros, listaVacia, 0));
-
-        // Obtener pares de numeros hasta n
-        ArrayList<Integer> listaVacia2 = new ArrayList<Integer>();
-        System.out.println("Lista pares 2: " + Mates.obtenerListaParHastaN(listaVacia2, 9));
-
-        // Obtener pares de numeros hasta n
-        int[] listaNumeros3 = {1, 2, 3};
-        int[] listaNumeros4 = {2, 4, 6};
-        System.out.println("Producto escalar: " + Mates.productoEscalarListas(listaNumeros3, listaNumeros4, 0, 0));
+        System.out.println("\n\n -- Streams --");
+        Streams.generaStreamOf();
+        Streams.generaStreamRange();
+        Streams.generaStreamIterate();
+        Streams.generaStreamRandomDoubles();
     }
 
 }
